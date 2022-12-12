@@ -20,7 +20,13 @@ from pathlib import Path
 import psutil
 
 from .funcn import *
-from .util import custcap, dynamicthumb, get_readable_file_size, get_readable_time, parse
+from .util import (
+    custcap,
+    dynamicthumb,
+    get_readable_file_size,
+    get_readable_time,
+    parse,
+)
 from .worker import *
 
 
@@ -433,7 +439,7 @@ async def stats(e):
         out, dl, id = wh.split(";")
         ot = hbs(int(Path(out).stat().st_size))
         ov = hbs(int(Path(dl).stat().st_size))
-        ed = dt.now()
+        dt.now()
         name = dl.split("/")[1]
         input = (name[:45] + "…") if len(name) > 45 else name
         currentTime = get_readable_time(time.time() - botStartTime)
