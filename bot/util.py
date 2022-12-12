@@ -414,6 +414,10 @@ async def custcap(name, fname):
         oi = string.capwords(oi)
         out = f"encode/{fname}"
         crc32s = await crc32(out)
+        try:
+          a2 = await info(out, e)
+        except Exception:
+          a2 = ""
         caption = f"**◉ Title:** `{oi}`\n"
         if z:
             caption += f"**◉ Episode:** `{z}`"
@@ -425,7 +429,10 @@ async def custcap(name, fname):
             caption += "\n"
         if y:
             caption += f"**◉ Season:** `{y}`\n"
-        if fil3:
+        if fil3 and a2:
+            fil3 = fil3.format(**locals())
+            caption += f"**◉ Type:** [{fil3}]({a2})"
+        else:
             fil3 = fil3.format(**locals())
             caption += f"**◉ Type:** `{fil3}`"
         if z == g:

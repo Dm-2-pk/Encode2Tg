@@ -139,7 +139,10 @@ async def listqueue(event):
             y, yy = QUEUE[list(QUEUE.keys())[i]]
             x += f"{i}. {y}\n"
             i = i + 1
-        x += "\n**To remove an item from queue use** /clear <queue number>"
+        if x:
+          x += "\n**To remove an item from queue use** /clear <queue number>
+        else:
+          x += "**Nothing Here** 🐱"
     except Exception:
         x = "No Pending Item in Queue 😒"
     yo = await event.reply(x)
@@ -167,7 +170,10 @@ async def listqueuep(event):
             y = await qparse(y)
             x += f"{i}. {y}\n"
             i = i + 1
-        x += "\n**Queue based on auto-generated filename if you you want the actual queue use the command** /queue "
+        if x:
+          x += "\n**Queue based on auto-generated filename if you you want the actual queue use the command** /queue "
+        else:
+          x += 'wow, such emptiness 😶'
     except Exception:
         x = "No Pending Item in Queue 😒"
     yo = await event.reply(x)
