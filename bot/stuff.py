@@ -13,13 +13,13 @@
 # License can be found in <
 # https://github.com/1Danish-00/CompressorQueue/blob/main/License> .
 
+import os
 import shutil
-
-import psutil, os
-
 from pathlib import Path
-from .util import get_readable_file_size
-from .util import get_readable_time
+
+import psutil
+
+from .util import get_readable_file_size, get_readable_time
 from .worker import *
 
 
@@ -37,11 +37,13 @@ async def up(event):
 async def status(event):
     if str(event.sender_id) not in OWNER:
         return await event.delete()
-    ed = dt.now()
-    if os.path.exists('.git'):
-        last_commit = subprocess.check_output(["git log -1 --date=short --pretty=format:'%cd || %cr'"], shell=True).decode()
+    dt.now()
+    if os.path.exists(".git"):
+        last_commit = subprocess.check_output(
+            ["git log -1 --date=short --pretty=format:'%cd || %cr'"], shell=True
+        ).decode()
     else:
-        last_commit = 'UNAVAILABLE!'
+        last_commit = "UNAVAILABLE!"
     verpre = Path("version.txt")
     if verpre.is_file():
         with open("version.txt", "r") as file:
