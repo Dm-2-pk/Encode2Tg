@@ -1,5 +1,6 @@
 import string
 
+import zl
 import anitopy
 import country_converter as coco
 import requests
@@ -22,6 +23,32 @@ def get_readable_file_size(size_in_bytes) -> str:
     except IndexError:
         return "File too large"
 
+def get_readable_time(seconds: int) -> str:
+    result = ''
+    (days, remainder) = divmod(seconds, 86400)
+    days = int(days)
+    if days != 0:
+        result += f'{days}d'
+    (hours, remainder) = divmod(remainder, 3600)
+    hours = int(hours)
+    if hours != 0:
+        result += f'{hours}h'
+    (minutes, seconds) = divmod(remainder, 60)
+    minutes = int(minutes)
+    if minutes != 0:
+        result += f'{minutes}m'
+    seconds = int(seconds)
+    result += f'{seconds}s'
+    return result
+
+
+async def crc32(filename, chunksize=65536):
+    """Compute the CRC-32 checksum of the contents of the given filename"""
+    with open(filename, "rb") as f:
+        checksum = 0
+        while (chunk := f.read(chunksize)) :
+            checksum = zlib.crc32(chunk, checksum)
+        return "%X"%(checksum & 0xFFFFFFFF)
 
 async def wfilter():
   wname = Path("Namefilter.txt")
@@ -382,6 +409,8 @@ async def custcap(name, fname):
         except Exception:
             g = ""
         oi = string.capwords(oi)
+        out = f"encode/{fname}"
+        crc32s = await crc32(out)
         caption = f"**◉ Title:** `{oi}`\n"
         if z:
             caption += f"**◉ Episode:** `{z}`"
@@ -404,6 +433,7 @@ async def custcap(name, fname):
             caption += f"**◉ Episode Title:** `{st}`\n"
         if "1080" in nani:
             caption += "**◉ 🌟:** `[1080p] [AV1]`\n"
+        caption += "✿ **CRC32:** `[{crc32s}]`\n"
         caption += "**🔗 @ANi_MiNE**"
     except Exception:
         om = fname.split(".")[0]

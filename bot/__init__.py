@@ -45,6 +45,8 @@ from telethon.utils import pack_bot_file_id
 
 from .config import *
 
+botStartTime = time.time()
+
 LOG_FILE_NAME = "Logs.txt"
 
 

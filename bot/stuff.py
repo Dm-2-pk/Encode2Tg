@@ -15,9 +15,11 @@
 
 import shutil
 
-import psutil
+import psutil, os
 
+from pathlib import Path
 from .util import get_readable_file_size
+from .util import get_readable_time
 from .worker import *
 
 
@@ -36,7 +38,20 @@ async def status(event):
     if str(event.sender_id) not in OWNER:
         return await event.delete()
     ed = dt.now()
-    currentTime = ts(int((ed - uptime).seconds) * 1000)
+    if os.path.exists('.git'):
+        last_commit = subprocess.check_output(["git log -1 --date=short --pretty=format:'%cd || %cr'"], shell=True).decode()
+    else:
+        last_commit = 'UNAVAILABLE!'
+    verpre = Path("version.txt")
+    if verpre.is_file():
+        with open("version.txt", "r") as file:
+            vercheck = file.read().strip()
+            file.close()
+    else:
+        vercheck = "Tf?"
+    currentTime = {get_readable_time(time.time() - botStartTime)}
+    ostime = {get_readable_time(time.time() - psutil.boot_time())}
+    swap = psutil.swap_memory()
     total, used, free = shutil.disk_usage(".")
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)
@@ -44,18 +59,32 @@ async def status(event):
     sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
     recv = get_readable_file_size(psutil.net_io_counters().bytes_recv)
     cpuUsage = psutil.cpu_percent(interval=0.5)
-    memory = psutil.virtual_memory().percent
+    p_cores = {psutil.cpu_count(logical=False)}
+    t_cores = {psutil.cpu_count(logical=True)}
+    memory = psutil.virtual_memory()
     disk = psutil.disk_usage("/").percent
     await event.reply(
+        f"**Version:** `{vercheck}`\n"
+        f"**Commit Date** `{last_commit}`\n"
         f"**Bot Uptime:** `{currentTime}`\n"
+        f"**System Uptime:** `{ostime}`\n"
         f"**Total Disk Space:** `{total}`\n"
         f"**Used:** `{used}` "
         f"**Free:** `{free}`\n\n"
+        f"**SWAP:** `{get_readable_file_size(swap.total)}`"
+        f"** | **"
+        f"**Used:** `{swap.percent}%`\n\n"
         f"**Upload:** `{sent}`\n"
         f"**Download:** `{recv}`\n\n"
+        f"**Physical Cores:** `{p_cores}`\n"
+        f"**Total Cores:** `{t_cores}`\n\n"
         f"**CPU:** `{cpuUsage}%` "
-        f"**RAM:** `{memory}%` "
-        f"**DISK:** `{disk}%`"
+        f"**RAM:** `{memory.percent}%` "
+        f"**DISK:** `{disk}%`\n\n"
+        f"**RAM info**\n"
+        f"**Total:** `{get_readable_file_size(memory.total)}` "
+        f"**Free:** `{get_readable_file_size(memory.available)}` "
+        f"**Used:** `{get_readable_file_size(memory.used")}`"
     )
 
 
