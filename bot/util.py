@@ -1,5 +1,6 @@
 import string
 
+import zlib
 import anitopy
 import country_converter as coco
 import requests
