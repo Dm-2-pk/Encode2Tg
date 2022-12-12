@@ -415,9 +415,9 @@ async def custcap(name, fname):
         out = f"encode/{fname}"
         crc32s = await crc32(out)
         try:
-          a2 = await info(out, e)
+            a2 = await info(out, e)
         except Exception:
-          a2 = ""
+            a2 = ""
         caption = f"**◉ Title:** `{oi}`\n"
         if z:
             caption += f"**◉ Episode:** `{z}`"
