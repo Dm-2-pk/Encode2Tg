@@ -436,7 +436,7 @@ async def stats(e):
         ed = dt.now()
         name = dl.split("/")[1]
         input = (name[:45] + "…") if len(name) > 45 else name
-        currentTime = {get_readable_time(time.time() - botStartTime)}
+        currentTime = get_readable_time(time.time() - botStartTime)
         total, used, free = shutil.disk_usage(".")
         total = get_readable_file_size(total)
         used = get_readable_file_size(used)
