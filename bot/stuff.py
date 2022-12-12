@@ -51,8 +51,8 @@ async def status(event):
             file.close()
     else:
         vercheck = "Tf?"
-    currentTime = {get_readable_time(time.time() - botStartTime)}
-    ostime = {get_readable_time(time.time() - psutil.boot_time())}
+    currentTime = get_readable_time(time.time() - botStartTime)
+    ostime = get_readable_time(time.time() - psutil.boot_time())
     swap = psutil.swap_memory()
     total, used, free = shutil.disk_usage(".")
     total = get_readable_file_size(total)
@@ -61,15 +61,15 @@ async def status(event):
     sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
     recv = get_readable_file_size(psutil.net_io_counters().bytes_recv)
     cpuUsage = psutil.cpu_percent(interval=0.5)
-    p_cores = {psutil.cpu_count(logical=False)}
-    t_cores = {psutil.cpu_count(logical=True)}
+    p_cores = psutil.cpu_count(logical=False)
+    t_cores = psutil.cpu_count(logical=True)
     memory = psutil.virtual_memory()
     disk = psutil.disk_usage("/").percent
     await event.reply(
         f"**Version:** `{vercheck}`\n"
-        f"**Commit Date** `{last_commit}`\n"
+        f"**Commit Date** `{last_commit}`\n\n"
         f"**Bot Uptime:** `{currentTime}`\n"
-        f"**System Uptime:** `{ostime}`\n"
+        f"**System Uptime:** `{ostime}`\n\n"
         f"**Total Disk Space:** `{total}`\n"
         f"**Used:** `{used}` "
         f"**Free:** `{free}`\n\n"
@@ -83,7 +83,7 @@ async def status(event):
         f"**CPU:** `{cpuUsage}%` "
         f"**RAM:** `{memory.percent}%` "
         f"**DISK:** `{disk}%`\n\n"
-        f"**RAM info**\n"
+        f"**RAM info;**\n"
         f"**Total:** `{get_readable_file_size(memory.total)}` "
         f"**Free:** `{get_readable_file_size(memory.available)}` "
         f"**Used:** `{get_readable_file_size(memory.used)}`"
