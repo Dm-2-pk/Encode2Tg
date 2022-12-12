@@ -20,7 +20,7 @@ from pathlib import Path
 import psutil
 
 from .funcn import *
-from .util import custcap, dynamicthumb, get_readable_file_size, parse
+from .util import custcap, dynamicthumb, get_readable_file_size, get_readable_time, parse
 from .worker import *
 
 
@@ -450,8 +450,7 @@ async def stats(e):
         await e.answer(ans, cache_time=0, alert=True)
     except Exception as er:
         LOGS.info(er)
-        ed = dt.now()
-        currentTime = ts(int((ed - uptime).seconds) * 1000)
+        currentTime = get_readable_time(time.time() - botStartTime)
         total, used, free = shutil.disk_usage(".")
         total = get_readable_file_size(total)
         info = f"Error 404: File | Info not Found 🤔\nMaybe Bot was restarted\nKindly Resend Media\n\nOther Info\n═══════════\nBot Uptime: {currentTime}\n\nTotal Disk Space: {total}"

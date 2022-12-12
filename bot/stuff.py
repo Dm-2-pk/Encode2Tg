@@ -37,7 +37,6 @@ async def up(event):
 async def status(event):
     if str(event.sender_id) not in OWNER:
         return await event.delete()
-    dt.now()
     if os.path.exists(".git"):
         last_commit = subprocess.check_output(
             ["git log -1 --date=short --pretty=format:'%cd || %cr'"], shell=True
