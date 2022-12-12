@@ -140,7 +140,7 @@ async def listqueue(event):
             x += f"{i}. {y}\n"
             i = i + 1
         if x:
-          x += "\n**To remove an item from queue use** /clear <queue number>
+          x += "\n**To remove an item from queue use** /clear <queue number>"
         else:
           x += "**Nothing Here** 🐱"
     except Exception:
