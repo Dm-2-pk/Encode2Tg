@@ -94,8 +94,8 @@ async def startup():
         if LOG_CHANNEL:
             await bot.send_message(int(LOG_CHANNEL), "**Bot Is Back Online! 🛰️**")
 
-        def istat():
-            yield from loop.run_in_executor(p, autostat)
+        loop = asyncio.get_event_loop()
+        loop.create_task(autostat())
 
     except BaseException:
         pass
