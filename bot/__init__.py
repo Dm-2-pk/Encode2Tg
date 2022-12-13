@@ -93,7 +93,9 @@ async def startup():
             await bot.send_message(int(i), "**I'm Up! 😎**")
         if LOG_CHANNEL:
             await bot.send_message(int(LOG_CHANNEL), "**Bot Is Back Online! 🛰️**")
+
         def istat():
             yield from loop.run_in_executor(p, autostat)
+
     except BaseException:
         pass
