@@ -14,8 +14,6 @@
 # https://github.com/1Danish-00/CompressorQueue/blob/main/License> .
 from decouple import config
 
-
-
 try:
     APP_ID = config("APP_ID", default=6, cast=int)
     API_HASH = config("API_HASH", default="eb06d4abfb49dc3eeb1aeb98ae0f581e")
