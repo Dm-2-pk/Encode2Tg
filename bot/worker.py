@@ -227,13 +227,15 @@ async def stateditor(x, channel, id):
     except Exception:
         pass
 
-async def autostat():
+def autostat():
   try:
     if FCHANNEL and FCHANNEL_STAT:
       while FCHANNEL_STAT:
         estat = await encodestat()
         await stateditor(estat, int(FCHANNEL), int(FCHANNEL_STAT))
         await asyncio.sleep(60)
+  except Exception:
+    pass
 
 
 async def reffmpeg(event):
