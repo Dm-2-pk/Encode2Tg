@@ -93,9 +93,10 @@ async def startup():
             await bot.send_message(int(i), "**I'm Up! 😎**")
         if LOG_CHANNEL:
             await bot.send_message(int(LOG_CHANNEL), "**Bot Is Back Online! 🛰️**")
-
-        loop = asyncio.get_event_loop()
-        loop.create_task(autostat())
-
+        try:
+            asyncio.get_event_loop().run_until_complete(autostat())
+        except Exception:
+            ers = traceback.format_exc()
+            LOGS.info(ers)
     except BaseException:
         pass
