@@ -188,7 +188,7 @@ async def listqueuep(event):
     await yo.delete()
 
 
-async def encodestat():
+def encodestat():
     if FCHANNEL and FCHANNEL_STAT:
         if not QUEUE and not WORKING:
             x = "**Currently Resting…😑**"
@@ -220,10 +220,12 @@ async def encodestat():
         return x
 
 
-async def stateditor(x, channel, id):
+def stateditor(x, channel, id):
     try:
         if channel and id:
-            return await app.edit_message_text(channel, id, x)
+            # return await app.edit_message_text(channel, id, x)
+            return app.edit_message_text(channel, id, x)
+
     except Exception:
         pass
 
@@ -232,9 +234,13 @@ def autostat():
     try:
         if FCHANNEL and FCHANNEL_STAT:
             while FCHANNEL_STAT:
-                estat = await encodestat()
-                await stateditor(estat, int(FCHANNEL), int(FCHANNEL_STAT))
-                await asyncio.sleep(60)
+                # estat = await encodestat()
+                estat = encodestat()
+                # await stateditor(estat, int(FCHANNEL), int(FCHANNEL_STAT))
+                stateditor(estat, int(FCHANNEL), int(FCHANNEL_STAT))
+
+                # await asyncio.sleep(60)
+                time.sleep(60)
     except Exception:
         pass
 
