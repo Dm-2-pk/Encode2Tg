@@ -188,6 +188,54 @@ async def listqueuep(event):
     await yo.delete()
 
 
+async def encodestat():
+    if FCHANNEL and FCHANNEL_STAT:
+        if not QUEUE and not WORKING:
+            x = "**Currently Resting…😑**"
+            return x
+        if not QUEUE:
+            x = "**◉ Busy…**"
+            return x
+        try:
+            if WORKING:
+                i = 0
+                x = "**QUEUE:**\n──────\n"
+            else:
+                i = 1
+                y, yy = QUEUE[list(QUEUE.keys())[0]]
+                y = await qparse(y)
+                x = f"**STATUS:**\n\n🟢: `{y}`\n\n**QUEUE:**\n──────\n"
+            while i < len(QUEUE):
+                y, yy = QUEUE[list(QUEUE.keys())[i]]
+                y = await qparse(y)
+                x += f"{i}. `{y}`\n"
+                i = i + 1
+            if len(QUEUE) < 1:
+                loc = await enquotes()
+                x += f"🤓 {loc}"
+        except Exception:
+            y, yy = QUEUE[list(QUEUE.keys())[0]]
+            y = await qparse(y)
+            x = f"**Currently Encoding:** `{y}`\n\n**QUEUE:**\n──────\n`Nothing Here.`"
+        return x
+
+
+async def stateditor(x, channel, id):
+    try:
+        if channel and id:
+            return await app.edit_message_text(channel, id, x)
+    except Exception:
+        pass
+
+def autostat():
+  try:
+    if FCHANNEL and FCHANNEL_STAT:
+      while FCHANNEL_STAT:
+        estat = await encodestat()
+        await stateditor(estat, int(FCHANNEL), int(FCHANNEL_STAT))
+        await asyncio.sleep(60)
+
+
 async def reffmpeg(event):
     if str(event.sender_id) not in OWNER:
         return await event.delete()
@@ -785,11 +833,10 @@ async def pencode(message):
         xxx = ts(int((eees - ees).seconds) * 1000)
         try:
             a1 = await info(dl, e)
-            a2 = await info(out, e)
             text = ""
             if rlsgrp:
                 text += f"**Source:** `[{rlsgrp}]`"
-            text += f"\n\nMediainfo: **[Before]({a1})**//**[After]({a2})**"
+            text += f"\n\nMediainfo: **[(Source)]({a1})**"
             dp = await ds.reply(
                 text,
                 disable_web_page_preview=True,

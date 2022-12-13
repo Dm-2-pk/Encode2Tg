@@ -66,7 +66,7 @@ async def status(event):
     disk = psutil.disk_usage("/").percent
     await event.reply(
         f"**Version:** `{vercheck}`\n"
-        f"**Commit Date** `{last_commit}`\n\n"
+        f"**Commit Date:** `{last_commit}`\n\n"
         f"**Bot Uptime:** `{currentTime}`\n"
         f"**System Uptime:** `{ostime}`\n\n"
         f"**Total Disk Space:** `{total}`\n"
@@ -83,8 +83,8 @@ async def status(event):
         f"**RAM:** `{memory.percent}%` "
         f"**DISK:** `{disk}%`\n\n"
         f"**Total RAM:** `{get_readable_file_size(memory.total)}`\n "
-        f"**Free:** `{get_readable_file_size(memory.available)}` "
         f"**Used:** `{get_readable_file_size(memory.used)}`"
+        f"**Free:** `{get_readable_file_size(memory.available)}` "
     )
 
 
@@ -96,7 +96,7 @@ async def start(event):
             await yo.delete()
             return await event.delete()
     await event.reply(
-        f"Hi `{event.sender.first_name}`\nThis Is A Bot Which Can Encode Videos.\nReduce Size of Videos With Negligible Quality Change\nAnd can Generate Samples/screenshots too.\nOhh And It's For Personal Use Only! 😗",
+        f"Hi `{event.sender.first_name}`\nThis is a bot that encodes Videos.\nOhh And It's For Personal Use Only! 😗",
         buttons=[
             [Button.inline("HELP", data="ihelp")],
             [
@@ -110,20 +110,20 @@ async def start(event):
 
 async def help(event):
     await event.reply(
-        "**🐠 A Quality CompressorQueue**\n\n+This Bot Encode Videos With Negligible Quality Change.\n+Generate Sample Encoded Video\n+Easy to Use\n-Due to Quality Settings Bot Takes Time To Encode.\nSo Be patience Nd Send videos One By One After Completing.\nDont Spam Bot.\n\nJust Forward Video To Get Options"
+        "**👘 An Encode bot**\n\n+This Bot Encode Videos With your custom ffmpeg or handbrake-cli settings.\n+Easy to Use (Depends)\n-Due to your custom Settings & hosting server bot may or may not take time to encode.\n\n\nJust Forward a Video…/videos"
     )
 
 
 async def ihelp(event):
     await event.edit(
-        "**🐠 A Quality CompressorQueue**\n\n+This Bot Encode Videos With Negligible Quality Change.\n+Generate Sample Encoded Video\n+Screenshots Too\n+Easy to Use\n-Due to Quality Settings Bot Takes Time To Encode.\nSo Be patience Nd Send videos One By One After Completing.\nDont Spam Bot.\n\nJust Forward Video To Get Options",
+        "**⛩️ An Encode bot**\n\n+This Bot Encode Videos With your custom ffmpeg or handbrake-cli settings.\n+Easy to Use (Depends)\n-Due to your custom Settings & hosting server bot may or may not take time to encode.\n\n\nJust Forward a Video…/videos",
         buttons=[Button.inline("BACK", data="beck")],
     )
 
 
 async def beck(event):
     await event.edit(
-        f"Hi `{event.sender.first_name}`\nThis is A CompressorQueue Which Can Encode Videos.\nReduce Size of Videos With Negligible Quality Change\nU can Generate Samples/screenshots too.",
+        f"Hi `{event.sender.first_name}`\nThis is bot that encodes Videos.\n\n",
         buttons=[
             [Button.inline("HELP", data="ihelp")],
             [

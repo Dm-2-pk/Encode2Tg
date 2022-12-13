@@ -34,6 +34,7 @@ from datetime import datetime as dt
 from logging import DEBUG, INFO, basicConfig, getLogger, warning
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
+from concurrent.futures import ProcessPoolExecutor
 
 import aiohttp
 import psutil
@@ -48,6 +49,8 @@ from .config import *
 botStartTime = time.time()
 
 LOG_FILE_NAME = "Logs.txt"
+loop = asyncio.get_event_loop()
+p = ProcessPoolExecutor(2)
 
 
 if os.path.exists(LOG_FILE_NAME):
@@ -90,5 +93,6 @@ async def startup():
             await bot.send_message(int(i), "**I'm Up! 😎**")
         if LOG_CHANNEL:
             await bot.send_message(int(LOG_CHANNEL), "**Bot Is Back Online! 🛰️**")
+        yield from loop.run_in_executor(p, autostat)
     except BaseException:
         pass

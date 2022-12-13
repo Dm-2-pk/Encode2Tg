@@ -6,5 +6,7 @@ psutil
 tgcrypto
 pyrogram
 pymongo[srv]
+random_word
+quote
 https://github.com/New-dev0/Telethon/archive/Aurium.zip
 html_telegraph_poster

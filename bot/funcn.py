@@ -21,7 +21,8 @@ import os
 import subprocess
 import time
 from io import StringIO
-
+from random_word import RandomWords
+from quote import quote
 from pymongo import MongoClient
 
 from . import *
@@ -153,6 +154,20 @@ def hbs(size):
 
 
 No_Flood = {}
+
+async def enquotes():
+  res = ''
+  while not res:
+   try:
+    r = RandomWords()
+    w = r.get_random_word()
+    res = quote(w, limit=1)
+    for i in range(len(res)):
+      result = res[i]['quote']
+      output = (result[:2045] + "…") if len(result) > 2046 else result
+   except Exception:
+    pass
+  return output
 
 
 async def progress_for_pyrogram(current, total, bot, ud_type, message, start):

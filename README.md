@@ -15,7 +15,7 @@ Compulsory Variables | Explanation
 
 Optional Variables | Explanation
 :--------- | :---------------------------------------------
-`THUMBNAIL`  | input telegraph link of a picture for use as Thumbnail.
+`THUMBNAIL` `ICON` | input telegraph link of a picture for use as Thumbnail, Watermark.
 `FFMPEG` | input Your FFMPEG Code or Handbrake-cli code (after installing it)  with """{}""" as input and output. (Eg. __ffmpeg -i """{}""" -preset veryfast -vcodec libx265 -crf 27 """{}"""__) escape the " characters if you're deploying locally 
 `LOG_CHANNEL` | Input Log Group/Channel ID (bot must be an admin in target group or channel)
 `DATABASE_URL` | input valid Mongodb Database Url
