@@ -30,11 +30,11 @@ import subprocess
 import sys
 import time
 import traceback
+from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime as dt
 from logging import DEBUG, INFO, basicConfig, getLogger, warning
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
-from concurrent.futures import ProcessPoolExecutor
 
 import aiohttp
 import psutil
