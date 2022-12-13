@@ -227,7 +227,7 @@ async def stateditor(x, channel, id):
     except Exception:
         pass
 
-def autostat():
+async def autostat():
   try:
     if FCHANNEL and FCHANNEL_STAT:
       while FCHANNEL_STAT:

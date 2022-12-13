@@ -31,6 +31,8 @@ try:
     LOG_CHANNEL = config("LOG_CHANNEL", default="")
     DBNAME = config("DBNAME", default="TgEncode")
     DATABASE_URL = config("DATABASE_URL", default="")
+    FCHANNEL = config("FCHANNEL", default="")
+    FCHANNEL_STAT = config("FCHANNEL_STAT", default="")
 except Exception as e:
     print("Environment vars Missing")
     print("something went wrong")
