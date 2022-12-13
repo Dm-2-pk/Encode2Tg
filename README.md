@@ -1,8 +1,12 @@
 # Encode2Tg [BETA] [![pyLint](https://github.com/Niffy-the-conqueror/Encode2Tg/actions/workflows/pyLint.yml/badge.svg?branch=anime)](https://github.com/Niffy-the-conqueror/Encode2Tg/actions/workflows/pyLint.yml)
+[![Build Status](https://dev.azure.com/itsjustplainr/E2tg/_apis/build/status/Niffy-the-conqueror.Encode2Tg?branchName=anime&jobName=Work)](https://dev.azure.com/itsjustplainr/E2tg/_build/latest?definitionId=2&branchName=anime)
 
 ## With HandBrakeCLI support
 
 ### Variables
+
+___(For local/vps deployment rename [.env.sample](.env.sample) to .env and edit with your variable)___
+
 ---
 Compulsory Variables | Explanation
 :--------- | :---------------------------------------------
