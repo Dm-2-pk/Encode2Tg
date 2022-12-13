@@ -398,5 +398,6 @@ async def something():
 LOGS.info("Bot has started.")
 with bot:
     bot.loop.run_until_complete(startup())
+    yield from loop.run_in_executor(p, autostat)
     bot.loop.run_until_complete(something())
     bot.loop.run_forever()
