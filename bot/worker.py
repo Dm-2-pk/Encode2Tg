@@ -121,7 +121,7 @@ async def update2(client, message):
         try:
             await qclean()
             bashrun(["python3", "update.py"])
-            os.execl(executable, executable, "-m", "bot")
+            os.execl(sys.executable, sys.executable, "-m", "bot")
         except Exception:
             ers = traceback.format_exc()
             LOGS.info(ers)
@@ -148,7 +148,7 @@ async def restart(event):
         await asyncio.sleep(1)
         await rst.edit("`Restarting Please Wait…`")
         await qclean()
-        osexecl(executable, executable, "-m", "bot")
+        osexecl(sys.executable, sys.executable, "-m", "bot")
     except Exception as err:
         await event.reply("Error Occurred")
         LOGS.info(str(err))
