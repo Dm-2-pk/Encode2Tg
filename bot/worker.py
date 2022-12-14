@@ -148,7 +148,7 @@ async def restart(event):
         await asyncio.sleep(1)
         await rst.edit("`Restarting Please Wait…`")
         await qclean()
-        osexecl(sys.executable, sys.executable, "-m", "bot")
+        os.execl(sys.executable, sys.executable, "-m", "bot")
     except Exception as err:
         await event.reply("Error Occurred")
         LOGS.info(str(err))
