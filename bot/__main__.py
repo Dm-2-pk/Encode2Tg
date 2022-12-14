@@ -211,6 +211,7 @@ async def _(app, message):
 
 async def something():
     for i in itertools.count():
+        await (statuschecker)
         try:
             if not WORKING and QUEUE:
                 # user = int(OWNER.split()[0])
@@ -408,6 +409,5 @@ async def something():
 LOGS.info("Bot has started.")
 with bot:
     bot.loop.run_until_complete(startup())
-    asyncio.create_task(autostat())
     bot.loop.run_until_complete(something())
     bot.loop.run_forever()

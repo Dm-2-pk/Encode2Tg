@@ -270,7 +270,7 @@ async def autostat():
 async def statuschecker():
     if not STARTUP:
         try:
-            await asyncio.gather(autostat())
+            asyncio.create_task(autostat())
             # some other stuff to do ONLY on startup couldn't find a better way
             # even after more than 8 trials which i committed
         except Exception:
