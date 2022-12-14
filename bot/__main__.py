@@ -211,7 +211,7 @@ async def _(app, message):
 
 async def something():
     for i in itertools.count():
-        await (statuschecker)
+        await statuschecker()
         try:
             if not WORKING and QUEUE:
                 # user = int(OWNER.split()[0])
