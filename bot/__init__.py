@@ -87,11 +87,16 @@ except Exception as e:
     exit()
 
 
-async def startup():
+async def startup(autostat):
     try:
         for i in OWNER.split():
             await bot.send_message(int(i), "**I'm Up! 😎**")
         if LOG_CHANNEL:
             await bot.send_message(int(LOG_CHANNEL), "**Bot Is Back Online! 🛰️**")
+        try:
+            await asyncio.gather(autostat())
+        except Exception:
+          ers = traceback.format_exc()
+          LOGS.info(ers)
     except BaseException:
         pass
