@@ -200,6 +200,7 @@ async def _(app, message):
 
 
 async def something():
+    await statuschecker()
     for i in itertools.count():
         try:
             if not WORKING and QUEUE:
@@ -397,6 +398,6 @@ async def something():
 
 LOGS.info("Bot has started.")
 with bot:
-    bot.loop.run_until_complete(startup(autostat))
+    bot.loop.run_until_complete(startup())
     bot.loop.run_until_complete(something())
     bot.loop.run_forever()

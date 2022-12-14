@@ -32,6 +32,7 @@ from .config import *
 GROUPENC = []
 VERSION2 = []
 EVENT2 = []
+STARTUP = []
 WORKING = []
 QUEUE = {}
 OK = {}
