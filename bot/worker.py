@@ -116,15 +116,15 @@ async def upload2(bot, from_user_id, filepath, reply, thum, caption):
 
 
 async def update2(client, message):
-  if str(message.from_user.id) in OWNER:
-    await message.reply("`Updating…`")
-    try:
-      await qclean()
-      bashrun(["python3", "update.py"])
-      os.execl(executable, executable, "-m", "bot")
-    except Exception:
-      ers = traceback.format_exc()
-      LOGS.info(ers)
+    if str(message.from_user.id) in OWNER:
+        await message.reply("`Updating…`")
+        try:
+            await qclean()
+            bashrun(["python3", "update.py"])
+            os.execl(executable, executable, "-m", "bot")
+        except Exception:
+            ers = traceback.format_exc()
+            LOGS.info(ers)
 
 
 async def nuke(event):

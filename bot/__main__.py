@@ -56,10 +56,10 @@ async def _(e):
 
 
 @bot.on(events.NewMessage(pattern="/nuke"))
- async def _(e):
+async def _(e):
     await nuke(e)
-  
-  
+
+
 @bot.on(events.NewMessage(pattern="/cancelall"))
 async def _(e):
     await clean(e)
