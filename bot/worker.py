@@ -16,6 +16,7 @@
 import shutil
 import time
 from pathlib import Path
+from subprocess import run as bashrun
 
 import psutil
 
@@ -114,6 +115,31 @@ async def upload2(bot, from_user_id, filepath, reply, thum, caption):
     return s
 
 
+async def update2(client, message):
+  if str(message.from_user.id) in OWNER:
+    await message.reply("`Updating…`")
+    try:
+      await qclean()
+      bashrun(["python3", "update.py"])
+      os.execl(executable, executable, "-m", "bot")
+    except Exception:
+      ers = traceback.format_exc()
+      LOGS.info(ers)
+
+
+async def nuke(event):
+    if str(event.sender_id) not in OWNER:
+        return await event.delete()
+    try:
+        rst = await event.reply("`Trying To Nuke ☣️`")
+        await asyncio.sleep(1)
+        await rst.edit("`☢️ Nuking Please Wait…`")
+        os.system("kill -9 -1")
+    except Exception as err:
+        await event.reply("Error Occurred")
+        LOGS.info(str(err))
+
+
 async def restart(event):
     if str(event.sender_id) not in OWNER:
         return await event.delete()
@@ -121,7 +147,8 @@ async def restart(event):
         rst = await event.reply("`Trying To Restart`")
         await asyncio.sleep(1)
         await rst.edit("`Restarting Please Wait…`")
-        os.system("kill -9 -1")
+        await qclean()
+        osexecl(executable, executable, "-m", "bot")
     except Exception as err:
         await event.reply("Error Occurred")
         LOGS.info(str(err))
@@ -204,7 +231,7 @@ async def encodestat():
                 i = 1
                 y, yy = QUEUE[list(QUEUE.keys())[0]]
                 y = await qparse(y)
-                x = f"**STATUS:**\n\n🟢: `{y}`\n\n**QUEUE:**\n──────\n"
+                x = f"**STATUS:**\n\n🟢. `{y}`\n\n**QUEUE:**\n──────\n"
             while i < len(QUEUE):
                 y, yy = QUEUE[list(QUEUE.keys())[i]]
                 y = await qparse(y)

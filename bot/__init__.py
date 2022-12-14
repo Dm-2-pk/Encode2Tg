@@ -87,7 +87,7 @@ except Exception as e:
     exit()
 
 
-async def startup(autostat):
+async def startup():
     try:
         for i in OWNER.split():
             await bot.send_message(int(i), "**I'm Up! 😎**")

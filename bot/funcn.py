@@ -291,6 +291,19 @@ def decode(key):
         return OK[int(key)]
     return
 
+async def qclean():
+  try:
+    os.system("rm downloads/*")
+    os.system("rm encode/*")
+    for proc in psutil.process_iter():
+            processName = proc.name()
+            processID = proc.pid
+            print(processName, " - ", processID)
+            if processName == "ffmpeg":
+                os.kill(processID, signal.SIGKILL)
+  except Exception:
+    pass
+
 
 async def skip(e):
     wah = e.pattern_match.group(1).decode("UTF-8")

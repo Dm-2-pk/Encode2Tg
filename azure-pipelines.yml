@@ -3,7 +3,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- anime
+  batch: true
+  branches:
+    include:
+    - anime
 
 resources:
 - repo: self

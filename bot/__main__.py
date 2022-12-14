@@ -55,6 +55,11 @@ async def _(e):
     await restart(e)
 
 
+  @bot.on(events.NewMessage(pattern="/nuke"))
+  async def _(e):
+      await nuke(e)
+  
+  
 @bot.on(events.NewMessage(pattern="/cancelall"))
 async def _(e):
     await clean(e)
@@ -109,6 +114,11 @@ async def _(e):
 @app.on_message(filters.incoming & filters.command(["peval"]))
 async def _(app, message):
     await eval_message_p(app, message)
+
+
+@app.on_message(filters.incoming & filters.command(["update"]))
+async def _(app, message):
+    await update2(app, message)
 
 
 @bot.on(events.NewMessage(pattern="/bash"))
