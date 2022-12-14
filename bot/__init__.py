@@ -96,7 +96,7 @@ async def startup(autostat):
         try:
             await asyncio.gather(autostat())
         except Exception:
-          ers = traceback.format_exc()
-          LOGS.info(ers)
+            ers = traceback.format_exc()
+            LOGS.info(ers)
     except BaseException:
         pass
