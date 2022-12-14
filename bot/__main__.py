@@ -55,9 +55,9 @@ async def _(e):
     await restart(e)
 
 
-  @bot.on(events.NewMessage(pattern="/nuke"))
-  async def _(e):
-      await nuke(e)
+@bot.on(events.NewMessage(pattern="/nuke"))
+ async def _(e):
+    await nuke(e)
   
   
 @bot.on(events.NewMessage(pattern="/cancelall"))
