@@ -49,8 +49,6 @@ from .config import *
 botStartTime = time.time()
 
 LOG_FILE_NAME = "Logs.txt"
-loop = asyncio.get_event_loop()
-p = ProcessPoolExecutor(2)
 
 
 if os.path.exists(LOG_FILE_NAME):
