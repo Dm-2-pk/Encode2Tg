@@ -244,10 +244,11 @@ async def statuschecker():
     if not STARTUP:
         try:
             await asyncio.gather(autostat())
-            # some other stuff to do ONLY on startup couldn't find a better way even after more than 8 trials which i committed
+            # some other stuff to do ONLY on startup couldn't find a better way
+            # even after more than 8 trials which i committed
         except Exception:
-          ers = traceback.format_exc()
-          LOGS.info(ers)
+            ers = traceback.format_exc()
+            LOGS.info(ers)
         STARTUP.append(1)
 
 
