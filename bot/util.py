@@ -424,9 +424,7 @@ async def custcap(name, fname):
                 raise Exception("Parsing turned off")
             variables = {"search": oi, "type": "ANIME"}
             json = (
-                requests.post(
-                    url, json={"query": anime_query, "variables": variables}
-                )
+                requests.post(url, json={"query": anime_query, "variables": variables})
                 .json()["data"]
                 .get("Media")
             )
