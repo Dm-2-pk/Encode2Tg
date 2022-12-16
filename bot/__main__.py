@@ -356,6 +356,9 @@ async def something():
                 pcap = await custcap(name, fname)
                 ds = await upload2(app, e.chat_id, out, nnn, thum, pcap)
                 await nnn.delete()
+                if FCHANNEL:
+                    chat = int(FCHANNEL)
+                    await ds.copy(chat_id=chat)
                 if LOG_CHANNEL:
                     chat = int(LOG_CHANNEL)
                     await ds.copy(chat_id=chat)
