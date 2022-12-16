@@ -479,7 +479,7 @@ async def thumb(event):
     if not event.photo:
         return
     os.system("rm thumb.jpg")
-    await event.client.download_media(event.media, file="/bot/thumb.jpg")
+    await event.client.download_media(event.media, file="thumb.jpg")
     await event.reply("**Thumbnail Saved Successfully.**")
 
 

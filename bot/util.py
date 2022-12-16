@@ -303,6 +303,7 @@ async def parse(name, kk, aa):
             except Exception:
                 g = ""
                 col = ""
+                cb = b
             bb = ""
             bb += "[A-M]"
             bb += f" {cb}"
