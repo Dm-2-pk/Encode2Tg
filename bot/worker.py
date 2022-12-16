@@ -117,7 +117,9 @@ async def upload2(bot, from_user_id, filepath, reply, thum, caption):
 
 async def update2(client, message):
     if str(message.from_user.id) in OWNER:
-        await message.reply("`Updating…`")
+        upt_mess = "Updating…"
+        rply = await message.reply(f"`{upt_mess}`")
+        await enquoter(upt_mess, reply)
         try:
             envp = Path(".env")
             ffmpegp = Path("ffmpeg.txt")
@@ -155,9 +157,9 @@ async def restart(event):
     try:
         rst = await event.reply("`Trying To Restart`")
         await asyncio.sleep(1)
-        rst = await rst.edit("`Restarting Please Wait…`")
-        quotes = await enquotes()
-        await rst.edit(f"**Restarting Please Wait…**\nwhile you wait\n\n{quotes}")
+        rst_msg = "Restarting Please Wait…"
+        rst = await rst.edit(f"`{rst_msg}`")
+        await enquoter(rst_msg, rst)
         await qclean()
         os.execl(sys.executable, sys.executable, "-m", "bot")
     except Exception as err:
