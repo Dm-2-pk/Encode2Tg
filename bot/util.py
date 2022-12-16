@@ -422,17 +422,17 @@ async def custcap(name, fname):
             ttx = Path("cap.txt")
             if ttx.is_file():
                 raise Exception("Parsing turned off")
-                variables = {"search": oi, "type": "ANIME"}
-                json = (
-                    requests.post(
-                        url, json={"query": anime_query, "variables": variables}
-                    )
-                    .json()["data"]
-                    .get("Media")
+            variables = {"search": oi, "type": "ANIME"}
+            json = (
+                requests.post(
+                    url, json={"query": anime_query, "variables": variables}
                 )
-                oi = f"{json['title']['english']}"
-                oi = f"{json['title']['romaji']}" if oi == "None" else oi
-                g = f"{json.get('episodes')}"
+                .json()["data"]
+                .get("Media")
+            )
+            oi = f"{json['title']['english']}"
+            oi = f"{json['title']['romaji']}" if oi == "None" else oi
+            g = f"{json.get('episodes')}"
         except Exception:
             g = ""
         oi = string.capwords(oi)
