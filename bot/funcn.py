@@ -162,6 +162,7 @@ def hbs(size):
 
 No_Flood = {}
 
+
 async def varsgetter(files):
     evars = ""
     if files.is_file():
@@ -178,7 +179,6 @@ async def varssaver(evars, files):
         file.close()
 
 
-
 async def enquotes():
     res = ""
     while not res:
@@ -187,8 +187,8 @@ async def enquotes():
             w = r.get_random_word()
             res = quote(w, limit=1)
             for i in range(len(res)):
-                result = res[i]['quote']
-                result2 = res[i]['author']
+                result = res[i]["quote"]
+                result2 = res[i]["author"]
                 emoji = ("🤓", "😎", "🤠", "🌚", "🌝", "☺️", "😊", "😑", "🥸")
                 y = random.choice(emoji)
                 output = (result[:2045] + "…") if len(result) > 2046 else result
