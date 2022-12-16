@@ -210,23 +210,23 @@ async def parse(name, kk, aa):
         olif = Path("filter.txt")
         if olif.is_file():
             try:
-              ttx = Path("parse.txt")
-              if ttx.is_file():
-                raise Exception("Parsing turned off")
-              variables = {"search": b, "type": "ANIME"}
-              json = (
-                  requests.post(
-                      url, json={"query": anime_query, "variables": variables}
-                  )
-                  .json()["data"]
-                  .get("Media")
-              )
-              b = f"{json['title']['english']}"
-              b = f"{json['title']['romaji']}" if b == "None" else b
-              if fil2 == "Auto":
-                  fil2 = f"{json['countryOfOrigin']}"
-                  fil2 = await conconvert(fil2)
-              fil2 = "" if fil2 == "Disable" else fil2
+                ttx = Path("parse.txt")
+                if ttx.is_file():
+                    raise Exception("Parsing turned off")
+                variables = {"search": b, "type": "ANIME"}
+                json = (
+                    requests.post(
+                        url, json={"query": anime_query, "variables": variables}
+                    )
+                    .json()["data"]
+                    .get("Media")
+                )
+                b = f"{json['title']['english']}"
+                b = f"{json['title']['romaji']}" if b == "None" else b
+                if fil2 == "Auto":
+                    fil2 = f"{json['countryOfOrigin']}"
+                    fil2 = await conconvert(fil2)
+                fil2 = "" if fil2 == "Disable" else fil2
             except Exception:
                 ers = traceback.format_exc()
                 LOGS.info(ers)

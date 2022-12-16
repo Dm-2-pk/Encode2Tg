@@ -89,11 +89,15 @@ async def discap(event):
         ttx = Path("parse.txt")
         if ttx.is_file():
             os.remove(ttx)
-            await event.reply("**Successfully Enabled Anilist parsing & Auto-thumbnail*")
+            await event.reply(
+                "**Successfully Enabled Anilist parsing & Auto-thumbnail*"
+            )
         else:
             file = open(ttx, "w")
             file.close()
-            await event.reply("**Successfully Disabled Anilist Parsing & Auto-thumbnail**")
+            await event.reply(
+                "**Successfully Disabled Anilist Parsing & Auto-thumbnail**"
+            )
 
 
 async def clean(event):
