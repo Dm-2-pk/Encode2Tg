@@ -210,21 +210,27 @@ async def parse(name, kk, aa):
         olif = Path("filter.txt")
         if olif.is_file():
             try:
-                variables = {"search": b, "type": "ANIME"}
-                json = (
-                    requests.post(
-                        url, json={"query": anime_query, "variables": variables}
-                    )
-                    .json()["data"]
-                    .get("Media")
-                )
-                b = f"{json['title']['english']}"
-                b = f"{json['title']['romaji']}" if b == "None" else b
-                if fil2 == "Disable":
-                    fil2 = f"{json['countryOfOrigin']}"
-                    fil2 = await conconvert(fil2)
+              ttx = Path("parse.txt")
+              if ttx.is_file():
+                raise Exception("Parsing turned off")
+              variables = {"search": b, "type": "ANIME"}
+              json = (
+                  requests.post(
+                      url, json={"query": anime_query, "variables": variables}
+                  )
+                  .json()["data"]
+                  .get("Media")
+              )
+              b = f"{json['title']['english']}"
+              b = f"{json['title']['romaji']}" if b == "None" else b
+              if fil2 == "Auto":
+                  fil2 = f"{json['countryOfOrigin']}"
+                  fil2 = await conconvert(fil2)
+              fil2 = "" if fil2 == "Disable" else fil2
             except Exception:
-                pass
+                ers = traceback.format_exc()
+                LOGS.info(ers)
+                fil2 = "" if fil2 == "Disable" else fil2
             b = string.capwords(b)
             if len(b) > 33:
                 cb = b[:32] + "…"
@@ -240,7 +246,7 @@ async def parse(name, kk, aa):
                 bb += f" - {d}"
             if VERSION2:
                 bb += "v2"
-            if fil2 != "Disable":
+            if fil2:
                 bb += f" [{fil2}]"
             bb2 = bb.replace(cb, b)
             bb2 = bb2.replace("[A-M]", cb2)
@@ -249,7 +255,7 @@ async def parse(name, kk, aa):
             bb += ".mkv"
         else:
             try:
-                ttx = Path("cap.txt")
+                ttx = Path("parse.txt")
                 if ttx.is_file():
                     raise Exception("Parsing Turned off")
                 variables = {"search": b, "type": "ANIME"}
@@ -335,7 +341,7 @@ async def dynamicthumb(name, kk, aa):
     try:
         b, d, c, e, fil2, fil3, s, st = await parser(name)
         try:
-            ttx = Path("cap.txt")
+            ttx = Path("parse.txt")
             if ttx.is_file():
                 raise Exception("Parsing turned off")
             variables = {"search": b, "type": "ANIME"}
@@ -354,7 +360,7 @@ async def dynamicthumb(name, kk, aa):
         else:
             coy = b
         try:
-            ttx = Path("cap.txt")
+            ttx = Path("parse.txt")
             if ttx.is_file():
                 raise Exception("Parsing turned off")
             variables = {"search": coy, "type": "ANIME"}
@@ -421,7 +427,7 @@ async def custcap(name, fname):
         else:
             fil3 = fil3t
         try:
-            ttx = Path("cap.txt")
+            ttx = Path("parse.txt")
             if ttx.is_file():
                 raise Exception("Parsing turned off")
             variables = {"search": oi, "type": "ANIME"}

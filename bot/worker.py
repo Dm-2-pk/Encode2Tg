@@ -71,14 +71,29 @@ async def version2(event):
 async def discap(event):
     if str(event.sender_id) not in OWNER:
         return await event.delete()
-    ttx = Path("cap.txt")
-    if ttx.is_file():
-        os.remove(ttx)
-        await event.reply("**Successfully Enabled Parse By Caption**")
+    temp = ""
+    try:
+        temp = event.text.split(" ", maxsplit=1)[1]
+    except Exception:
+        pass
+    if not temp:
+        ttx = Path("cap.txt")
+        if ttx.is_file():
+            os.remove(ttx)
+            await event.reply("**Successfully Enabled Parse By Caption**")
+        else:
+            file = open(ttx, "w")
+            file.close()
+            await event.reply("**Successfully Disabled Parse By Caption**")
     else:
-        file = open(ttx, "w")
-        file.close()
-        await event.reply("**Successfully Disabled Parse By Caption**")
+        ttx = Path("parse.txt")
+        if ttx.is_file():
+            os.remove(ttx)
+            await event.reply("**Successfully Enabled Anilist parsing & Auto-thumbnail*")
+        else:
+            file = open(ttx, "w")
+            file.close()
+            await event.reply("**Successfully Disabled Anilist Parsing & Auto-thumbnail**")
 
 
 async def clean(event):

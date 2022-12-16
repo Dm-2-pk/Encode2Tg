@@ -372,11 +372,10 @@ async def something():
                 xxx = ts(int((eees - ees).seconds) * 1000)
                 try:
                     a1 = await info(dl, e)
-                    a2 = await info(out, e)
                     text = ""
                     if rlsgrp:
                         text += f"**Source:** `[{rlsgrp}]`"
-                    text += f"\n\nMediainfo: **[Before]({a1})**//**[After]({a2})**"
+                    text += f"\n\nMediainfo: **[(Source)]({a1})**"
                     dp = await ds.reply(
                         text,
                         disable_web_page_preview=True,
