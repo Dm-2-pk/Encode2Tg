@@ -18,6 +18,7 @@ import io
 import json
 import math
 import os
+import random
 import subprocess
 import time
 from io import StringIO
@@ -45,9 +46,13 @@ uptime = dt.now()
 os.system(f"wget {THUMB} -O thumb.jpg")
 os.system(f"wget {ICON} -O icon.png")
 
-file = open("ffmpeg.txt", "w")
-file.write(str(FFMPEG) + "\n")
-file.close()
+ffmpegfile = Path("ffmpeg.txt")
+if ffmpegfile.is_file():
+    pass
+else:
+    file = open(ffmpegfile, "w")
+    file.write(str(FFMPEG) + "\n")
+    file.close()
 
 if not os.path.isdir("downloads/"):
     os.mkdir("downloads/")
@@ -157,6 +162,22 @@ def hbs(size):
 
 No_Flood = {}
 
+async def varsgetter(files):
+    evars = ""
+    if files.is_file():
+        with open(files, "r") as file:
+            evars = file.read().rstrip()
+            file.close()
+    return evars
+
+
+async def varssaver(evars, files):
+    if evars:
+        file = open(files, "w")
+        file.write(str(evars) + "\n")
+        file.close()
+
+
 
 async def enquotes():
     res = ""
@@ -166,8 +187,12 @@ async def enquotes():
             w = r.get_random_word()
             res = quote(w, limit=1)
             for i in range(len(res)):
-                result = res[i]["quote"]
+                result = res[i]['quote']
+                result2 = res[i]['author']
+                emoji = ("🤓", "😎", "🤠", "🌚", "🌝", "☺️", "😊", "😑", "🥸")
+                y = random.choice(emoji)
                 output = (result[:2045] + "…") if len(result) > 2046 else result
+                output = f"{y} {result2}: {output}"
         except Exception:
             pass
     return output

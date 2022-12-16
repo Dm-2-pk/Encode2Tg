@@ -119,8 +119,17 @@ async def update2(client, message):
     if str(message.from_user.id) in OWNER:
         await message.reply("`Updating…`")
         try:
+            envp = Path(".env")
+            ffmpegp = Path("ffmpeg.txt")
+            filterp = Path("filter.txt")
+            envars = await varsgetter(envp)
+            ffmpegs = await varsgetter(ffmpegp)
+            filters = await varsgetter(filterp)
             await qclean()
             bashrun(["python3", "update.py"])
+            await varssaver(envars, envp)
+            await varssaver(ffmpegs, ffmpegp)
+            await varssaver(filters, filterp)
             os.execl(sys.executable, sys.executable, "-m", "bot")
         except Exception:
             ers = traceback.format_exc()
@@ -146,7 +155,9 @@ async def restart(event):
     try:
         rst = await event.reply("`Trying To Restart`")
         await asyncio.sleep(1)
-        await rst.edit("`Restarting Please Wait…`")
+        rst = await rst.edit("`Restarting Please Wait…`")
+        quotes = await enquotes()
+        await rst.edit(f"**Restarting Please Wait…**\nwhile you wait\n\n{quotes}")
         await qclean()
         os.execl(sys.executable, sys.executable, "-m", "bot")
     except Exception as err:
@@ -324,6 +335,7 @@ async def check(event):
         return await event.delete()
     with open("ffmpeg.txt", "r") as file:
         ffmpeg = file.read().rstrip()
+        file.close()
     await event.reply(f"**Current FFMPEG Code Is**\n\n`{ffmpeg}`")
 
 
