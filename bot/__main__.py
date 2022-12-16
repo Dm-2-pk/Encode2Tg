@@ -232,9 +232,8 @@ async def something():
                         message=file,
                         file_name=dl,
                     )
-                except Exception as r:
+                except Exception:
                     er = traceback.format_exc()
-                    LOGS.info(r)
                     LOGS.info(er)
                     WORKING.clear()
                     QUEUE.pop(list(QUEUE.keys())[0])
@@ -398,10 +397,9 @@ async def something():
                 os.remove(out)
             else:
                 await asyncio.sleep(3)
-        except Exception as err:
+        except Exception:
             er = traceback.format_exc()
             LOGS.info(er)
-            LOGS.info(err)
 
 
 ########### Start ############

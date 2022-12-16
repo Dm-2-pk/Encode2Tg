@@ -146,9 +146,10 @@ async def nuke(event):
         await asyncio.sleep(1)
         await rst.edit("`☢️ Nuking Please Wait…`")
         os.system("kill -9 -1")
-    except Exception as err:
+    except Exception:
         await event.reply("Error Occurred")
-        LOGS.info(str(err))
+        ers = traceback.format_exc()
+        LOGS.info(ers)
 
 
 async def restart(event):
@@ -162,9 +163,10 @@ async def restart(event):
         await enquoter(rst_msg, rst)
         await qclean()
         os.execl(sys.executable, sys.executable, "-m", "bot")
-    except Exception as err:
+    except Exception:
         await event.reply("Error Occurred")
-        LOGS.info(str(err))
+        ers = traceback.format_exc()
+        LOGS.info(ers)
 
 
 async def listqueue(event):
@@ -302,9 +304,10 @@ async def reffmpeg(event):
         file.close()
         await save2db2(ffmpegdb, FFMPEG)
         await event.reply(f"**Changed FFMPEG Code to**\n\n`{FFMPEG}`")
-    except Exception as err:
+    except Exception:
         await event.reply("Error Occurred")
-        LOGS.info(str(err))
+        ers = traceback.format_exc()
+        LOGS.info(ers)
 
 
 async def change(event):
@@ -327,9 +330,10 @@ async def change(event):
         file.close()
         await save2db2(ffmpegdb, temp)
         await event.reply(f"**Changed FFMPEG Code to**\n\n`{temp}`")
-    except Exception as err:
+    except Exception:
         await event.reply("Error Occurred")
-        LOGS.info(str(err))
+        ers = traceback.format_exc()
+        LOGS.info(ers)
 
 
 async def check(event):
@@ -432,9 +436,10 @@ async def filter(event):
         file.close()
         await save2db2(filterz, temp)
         await event.reply(f"**Changed filters to**\n\n`{temp}`")
-    except Exception as err:
+    except Exception:
         await event.reply("Error Occurred")
-        LOGS.info(str(err))
+        ers = traceback.format_exc()
+        LOGS.info(ers)
 
 
 async def clearqueue(event):
@@ -527,8 +532,9 @@ async def pres(e):
         q = (q[:45] + "…") if len(q) > 45 else q
         ansa = f"Auto-generated Filename:\n{nme}\n\nAuto-Generated Thumbnail:\n{oho}\n\nNext Up:\n{q}\n\nQueue Count:\n{t}"
         await e.answer(ansa, cache_time=0, alert=True)
-    except Exception as er:
-        LOGS.info(er)
+    except Exception:
+        ers = traceback.format_exc()
+        LOGS.info(ers)
         ansa = "YIKES"
         await e.answer(
             ansa,
@@ -559,8 +565,9 @@ async def stats(e):
         psutil.disk_usage("/").percent
         ans = f"CPU: {cpuUsage}%\n\nTotal Disk Space:\n{total}\n\nDownloaded:\n{ov}\n\nFileName:\n{input}\n\nCompressing:\n{ot}\n\nBot Uptime:\n{currentTime}\n\nUsed: {used}  Free: {free}"
         await e.answer(ans, cache_time=0, alert=True)
-    except Exception as er:
-        LOGS.info(er)
+    except Exception:
+        ers = traceback.format_exc()
+        LOGS.info(ers)
         currentTime = get_readable_time(time.time() - botStartTime)
         total, used, free = shutil.disk_usage(".")
         total = get_readable_file_size(total)
@@ -576,8 +583,9 @@ async def encod(event):
     try:
         EVENT2.clear()
         EVENT2.append(event)
-    except Exception as er:
-        LOGS.info(er)
+    except Exception:
+        ers = traceback.format_exc()
+        LOGS.info(ers)
 
 
 async def pencode(message):
@@ -914,8 +922,7 @@ async def pencode(message):
         os.remove(dl)
         os.remove(out)
         WORKING.clear()
-    except BaseException as er:
+    except BaseException:
         ers = traceback.format_exc()
-        LOGS.info(er)
         LOGS.info(ers)
         WORKING.clear()

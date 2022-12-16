@@ -202,7 +202,7 @@ async def enquotes():
                 emoji = ("🤓", "😎", "🤠", "🌚", "🌝", "☺️", "😊", "😑", "🥸")
                 y = random.choice(emoji)
                 output = (result[:2045] + "…") if len(result) > 2046 else result
-                output = f"{y} {result2}: {output}"
+                output = f"{y} **{result2}:** `{output}`"
         except Exception:
             pass
     return output
