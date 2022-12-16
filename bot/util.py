@@ -249,7 +249,7 @@ async def parse(name, kk, aa):
             bb += ".mkv"
         else:
             try:
-                ttx = Path(cap.txt)
+                ttx = Path("cap.txt")
                 if ttx.is_file():
                     raise Exception("Parsing Turned off")
                 variables = {"search": b, "type": "ANIME"}
