@@ -185,8 +185,8 @@ async def enquoter(msg, rply):
         await rply.edit(f"**{msg}**\n\n~while you wait~\n\n{quotes}")
         await asyncio.sleep(5)
     except Exception:
-            ers = traceback.format_exc()
-            LOGS.info(ers)
+        ers = traceback.format_exc()
+        LOGS.info(ers)
 
 
 async def enquotes():
