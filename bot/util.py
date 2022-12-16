@@ -249,6 +249,10 @@ async def parse(name, kk, aa):
                 bb2 += " | [1080p]"
             bb += ".mkv"
         else:
+          try:
+            ttx = Path(cap.txt)
+            if ttx.is_file():
+              raise Exception("Parsing Turned off")
             variables = {"search": b, "type": "ANIME"}
             json = (
                 requests.post(url, json={"query": anime_query, "variables": variables})
@@ -294,24 +298,27 @@ async def parse(name, kk, aa):
                 pass
             else:
                 col = con
-            bb = ""
-            bb += "[A-M]"
-            bb += f" {cb}"
-            if c:
-                bb += f" S{c}"
-            if d:
-                bb += f" - {d}"
-            if VERSION2:
-                bb += "v2"
-            if g == d:
-                bb += " [END]"
-            if col:
-                bb += f" [{col}]"
-            bb2 = bb.replace(cb, b)
-            bb2 = bb2.replace("[A-M]", cb2)
-            if "1080" in nani:
-                bb2 += " | [1080p]"
-            bb += ".mkv"
+          except Exception:
+            g = ""
+            col = ""
+          bb = ""
+          bb += "[A-M]"
+          bb += f" {cb}"
+          if c:
+              bb += f" S{c}"
+          if d:
+              bb += f" - {d}"
+          if VERSION2:
+              bb += "v2"
+          if g == d:
+              bb += " [END]"
+          if col:
+              bb += f" [{col}]"
+          bb2 = bb.replace(cb, b)
+          bb2 = bb2.replace("[A-M]", cb2)
+          if "1080" in nani:
+              bb2 += " | [1080p]"
+          bb += ".mkv"
     except Exception as er:
         LOGS.info(er)
         bb = kk.replace(f".{aa}", " @Ani_Mine.mkv")
@@ -323,6 +330,9 @@ async def dynamicthumb(name, kk, aa):
     try:
         b, d, c, e, fil2, fil3, s, st = await parser(name)
         try:
+            ttx = Path("cap.txt")
+            if ttx.is_file():
+              raise Exception("Parsing turned off")
             variables = {"search": b, "type": "ANIME"}
             json = (
                 requests.post(url, json={"query": anime_query, "variables": variables})
@@ -338,14 +348,20 @@ async def dynamicthumb(name, kk, aa):
             coy = f"{b} {coy}"
         else:
             coy = b
-        variables = {"search": coy, "type": "ANIME"}
-        json = (
-            requests.post(url, json={"query": anime_query, "variables": variables})
-            .json()["data"]
-            .get("Media")
-        )
-        mog = f"{json.get('coverImage')['extraLarge']}"
-        os.system(f"wget {mog} -O thumb2.jpg")
+        try:
+          ttx = Path("cap.txt")
+          if ttx.is_file():
+            raise Exception("Parsing turned off")
+          variables = {"search": coy, "type": "ANIME"}
+          json = (
+              requests.post(url, json={"query": anime_query, "variables": variables})
+              .json()["data"]
+              .get("Media")
+          )
+          mog = f"{json.get('coverImage')['extraLarge']}"
+          os.system(f"wget {mog} -O thumb2.jpg")
+        except Exception:
+          pass
     except Exception:
         pass
     return b, d, e
@@ -400,6 +416,9 @@ async def custcap(name, fname):
         else:
             fil3 = fil3t
         try:
+          ttx = Path("cap.txt")
+          if ttx.is_file():
+            raise Exception("Parsing turned off")
             variables = {"search": oi, "type": "ANIME"}
             json = (
                 requests.post(url, json={"query": anime_query, "variables": variables})
