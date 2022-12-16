@@ -2,13 +2,14 @@ import os
 from decouple import config
 from subprocess import run as bashrun
 
-   try:
+try:
         print("Default var for upstream repo & branch will used if none were given!")
         UPSTREAM_REPO = config("UPSTREAM_REPO", default="")
         UPSTREAM_BRANCH = config("UPSTREAM_BRANCH", default="")
-    except Exception as e:
+except Exception:
         print("Environment vars Missing")
-        print(str(e))
+        traceback.print_exc()
+try:
     if not UPSTREAM_REPO:
         UPSTREAM_REPO = "https://github.com/Niffy-the-conqueror/Encode2Tg"
     if not UPSTREAM_BRANCH:
@@ -28,3 +29,5 @@ from subprocess import run as bashrun
         print('Successfully updated with latest commit from UPSTREAM_REPO')
     else:
         print('Something went wrong while updating,maybe invalid upstream repo?')
+except Exception:
+     traceback.print_exc()
