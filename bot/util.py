@@ -321,8 +321,9 @@ async def parse(name, kk, aa):
             if "1080" in nani:
                 bb2 += " | [1080p]"
             bb += ".mkv"
-    except Exception as er:
-        LOGS.info(er)
+    except Exception:
+        ers = traceback.format_exc()
+        LOGS.info(ers)
         bb = kk.replace(f".{aa}", " @Ani_Mine.mkv")
         bb2 = bb
     return bb, bb2
@@ -469,6 +470,8 @@ async def custcap(name, fname):
         caption += f"✿ **CRC32:** `[{crc32s}]`\n"
         caption += "**🔗 @ANi_MiNE**"
     except Exception:
+        ers = traceback.format_exc()
+        LOGS.info(ers)
         om = fname.split(".")[0]
         ot = om.split("@")[0]
         caption = f"**{ot}**\n**🔗 @Ani_Mine**"
