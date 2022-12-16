@@ -2,28 +2,29 @@ import os
 from decouple import config
 from subprocess import run as bashrun
 
-try:
-    print("Default var for upstream repo & branch will used if none were given!")
-    UPSTREAM_REPO = config("UPSTREAM_REPO", default="")
-    UPSTREAM_BRANCH = config("UPSTREAM_BRANCH", default="")
-except Exception as e:
-    print("Environment vars Missing")
-    print(str(e))
-if not UPSTREAM_REPO:
-    UPSTREAM_REPO = "https://github.com/Niffy-the-conqueror/Encode2Tg"
-if not UPSTREAM_BRANCH:
-    UPSTREAM_BRANCH = "anime"
-if os.path.exists('.git'):
-    bashrun(["rm", "-rf", ".git"])
-update = bashrun([f"git init -q \
-                     && git config --global user.email 117080364+Niffy-the-conqueror@users.noreply.github.com \
-                     && git config --global user.name Niffy-the-conqueror \
-                     && git add . \
-                     && git commit -sm update -q \
-                     && git remote add origin {UPSTREAM_REPO} \
-                     && git fetch origin -q \
-                     && git reset --hard origin/{UPSTREAM_BRANCH} -q"], shell=True)
-if update.returncode == 0:
-    log_info('Successfully updated with latest commit from UPSTREAM_REPO')
-else:
-    log_error('Something went wrong while updating,maybe invalid upstream repo?')
+  try:
+      print("Default var for upstream repo & branch will used if none were given!")
+      UPSTREAM_REPO = config("UPSTREAM_REPO", default="")
+      UPSTREAM_BRANCH = config("UPSTREAM_BRANCH", default="")
+  except Exception as e:
+      print("Environment vars Missing")
+      print(str(e))
+  if not UPSTREAM_REPO:
+      UPSTREAM_REPO = "https://github.com/Niffy-the-conqueror/Encode2Tg"
+  if not UPSTREAM_BRANCH:
+      UPSTREAM_BRANCH = "anime"
+  if os.path.exists('.git'):
+      bashrun(["rm", "-rf", ".git"])
+  update = bashrun([f"git init -q \
+                       && python3 -m pip install -r requirements.txt \
+                       && git config --global user.email 117080364+Niffy-the-conqueror@users.noreply.github.com \
+                       && git config --global user.name Niffy-the-conqueror \
+                       && git add . \
+                       && git commit -sm update -q \
+                       && git remote add origin {UPSTREAM_REPO} \
+                       && git fetch origin -q \
+                       && git reset --hard origin/{UPSTREAM_BRANCH} -q"], shell=True)
+  if update.returncode == 0:
+      print('Successfully updated with latest commit from UPSTREAM_REPO')
+  else:
+      print('Something went wrong while updating,maybe invalid upstream repo?')

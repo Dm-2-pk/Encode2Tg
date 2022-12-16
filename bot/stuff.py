@@ -82,9 +82,9 @@ async def status(event):
         f"**CPU:** `{cpuUsage}%` "
         f"**RAM:** `{memory.percent}%` "
         f"**DISK:** `{disk}%`\n\n"
-        f"**Total RAM:** `{get_readable_file_size(memory.total)}`\n "
-        f"**Used:** `{get_readable_file_size(memory.used)}`"
-        f"**Free:** `{get_readable_file_size(memory.available)}` "
+        f"**Total RAM:** `{get_readable_file_size(memory.total)}`\n"
+        f"**Used:** `{get_readable_file_size(memory.used)}` "
+        f"**Free:** `{get_readable_file_size(memory.available)}`"
     )
 
 
