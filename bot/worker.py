@@ -90,7 +90,7 @@ async def discap(event):
         if ttx.is_file():
             os.remove(ttx)
             await event.reply(
-                "**Successfully Enabled Anilist parsing & Auto-thumbnail*"
+                "**Successfully Enabled Anilist parsing & Auto-thumbnail**"
             )
         else:
             file = open(ttx, "w")
@@ -271,9 +271,9 @@ async def encodestat():
                 y = await qparse(y)
                 x += f"{i}. `{y}`\n"
                 i = i + 1
-            if len(QUEUE) < 1:
+            if not len(QUEUE) > 0:
                 loc = await enquotes()
-                x += f"🤓 {loc}"
+                x += f"Nothing Here; While you wait:\n\n{loc}"
         except Exception:
             y, yy = QUEUE[list(QUEUE.keys())[0]]
             y = await qparse(y)

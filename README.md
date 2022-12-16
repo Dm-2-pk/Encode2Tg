@@ -52,7 +52,7 @@ groupenc - Allow Encoding in Group Toggle
 delfilter - Delete filter
 status - 🆕 Get bot's status
 showthumb - 🖼️ Show Current Thumbnail
-parse - Toggle Parsing with captions 
+parse - Toggle Parsing with captions or Anilist
 cancelall - ❌ Clear Cached Downloads & Queued Files
 clear - Clear Queued Files
 logs - Get Bot Logs
