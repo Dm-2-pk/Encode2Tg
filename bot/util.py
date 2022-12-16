@@ -300,6 +300,8 @@ async def parse(name, kk, aa):
                 else:
                     col = con
             except Exception:
+                ers = traceback.format_exc()
+                LOGS.info(ers)
                 g = ""
                 col = ""
                 cb = b
@@ -424,7 +426,9 @@ async def custcap(name, fname):
                 raise Exception("Parsing turned off")
             variables = {"search": oi, "type": "ANIME"}
             json = (
-                requests.post(url, json={"query": anime_query, "variables": variables})
+                requests.post(
+                    url, json={"query": anime_query, "variables": variables}
+                )
                 .json()["data"]
                 .get("Media")
             )
