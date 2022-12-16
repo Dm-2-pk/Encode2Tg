@@ -118,7 +118,7 @@ async def upload2(bot, from_user_id, filepath, reply, thum, caption):
 async def update2(client, message):
     if str(message.from_user.id) in OWNER:
         upt_mess = "Updating…"
-        await message.reply(f"`{upt_mess}`")
+        reply = await message.reply(f"`{upt_mess}`")
         await enquoter(upt_mess, reply)
         try:
             envp = Path(".env")
