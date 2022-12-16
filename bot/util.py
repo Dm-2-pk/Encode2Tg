@@ -249,76 +249,78 @@ async def parse(name, kk, aa):
                 bb2 += " | [1080p]"
             bb += ".mkv"
         else:
-          try:
-            ttx = Path(cap.txt)
-            if ttx.is_file():
-              raise Exception("Parsing Turned off")
-            variables = {"search": b, "type": "ANIME"}
-            json = (
-                requests.post(url, json={"query": anime_query, "variables": variables})
-                .json()["data"]
-                .get("Media")
-            )
-            b = f"{json['title']['english']}"
-            b = f"{json['title']['romaji']}" if b == "None" else b
-            con = f"{json['countryOfOrigin']}"
-            con = await conconvert(con)
-            g = f"{json.get('episodes')}"
-            b = string.capwords(b)
-            if len(b) > 33:
-                cb = b[:32] + "…"
-                cb = cb.split(":")[0]
-            else:
-                cb = b
-            col = ""
-            if wreleaser:
-                for item in wreleaser.split("\n"):
-                    if item.split(":")[0] in e:
-                        if item.split(":")[1] != "Disable":
-                            wcol = item.split(":")[1]
-                            break
+            try:
+                ttx = Path(cap.txt)
+                if ttx.is_file():
+                    raise Exception("Parsing Turned off")
+                variables = {"search": b, "type": "ANIME"}
+                json = (
+                    requests.post(
+                        url, json={"query": anime_query, "variables": variables}
+                    )
+                    .json()["data"]
+                    .get("Media")
+                )
+                b = f"{json['title']['english']}"
+                b = f"{json['title']['romaji']}" if b == "None" else b
+                con = f"{json['countryOfOrigin']}"
+                con = await conconvert(con)
+                g = f"{json.get('episodes')}"
+                b = string.capwords(b)
+                if len(b) > 33:
+                    cb = b[:32] + "…"
+                    cb = cb.split(":")[0]
+                else:
+                    cb = b
+                col = ""
+                if wreleaser:
+                    for item in wreleaser.split("\n"):
+                        if item.split(":")[0] in e:
+                            if item.split(":")[1] != "Disable":
+                                wcol = item.split(":")[1]
+                                break
+                            else:
+                                wcol = ""
                         else:
                             wcol = ""
-                    else:
-                        wcol = ""
-            if wnamer:
-                for item in wnamer.split("\n"):
-                    if item.split(":")[0] in name:
-                        if item.split(":")[1] != "Disable":
-                            col = item.split(":")[1]
-                            break
+                if wnamer:
+                    for item in wnamer.split("\n"):
+                        if item.split(":")[0] in name:
+                            if item.split(":")[1] != "Disable":
+                                col = item.split(":")[1]
+                                break
+                            else:
+                                col = ""
                         else:
-                            col = ""
-                    else:
-                        if wcol:
-                            col = wcol
-                        else:
-                            col = ""
+                            if wcol:
+                                col = wcol
+                            else:
+                                col = ""
+                if col:
+                    pass
+                else:
+                    col = con
+            except Exception:
+                g = ""
+                col = ""
+            bb = ""
+            bb += "[A-M]"
+            bb += f" {cb}"
+            if c:
+                bb += f" S{c}"
+            if d:
+                bb += f" - {d}"
+            if VERSION2:
+                bb += "v2"
+            if g == d:
+                bb += " [END]"
             if col:
-                pass
-            else:
-                col = con
-          except Exception:
-            g = ""
-            col = ""
-          bb = ""
-          bb += "[A-M]"
-          bb += f" {cb}"
-          if c:
-              bb += f" S{c}"
-          if d:
-              bb += f" - {d}"
-          if VERSION2:
-              bb += "v2"
-          if g == d:
-              bb += " [END]"
-          if col:
-              bb += f" [{col}]"
-          bb2 = bb.replace(cb, b)
-          bb2 = bb2.replace("[A-M]", cb2)
-          if "1080" in nani:
-              bb2 += " | [1080p]"
-          bb += ".mkv"
+                bb += f" [{col}]"
+            bb2 = bb.replace(cb, b)
+            bb2 = bb2.replace("[A-M]", cb2)
+            if "1080" in nani:
+                bb2 += " | [1080p]"
+            bb += ".mkv"
     except Exception as er:
         LOGS.info(er)
         bb = kk.replace(f".{aa}", " @Ani_Mine.mkv")
@@ -332,7 +334,7 @@ async def dynamicthumb(name, kk, aa):
         try:
             ttx = Path("cap.txt")
             if ttx.is_file():
-              raise Exception("Parsing turned off")
+                raise Exception("Parsing turned off")
             variables = {"search": b, "type": "ANIME"}
             json = (
                 requests.post(url, json={"query": anime_query, "variables": variables})
@@ -349,19 +351,19 @@ async def dynamicthumb(name, kk, aa):
         else:
             coy = b
         try:
-          ttx = Path("cap.txt")
-          if ttx.is_file():
-            raise Exception("Parsing turned off")
-          variables = {"search": coy, "type": "ANIME"}
-          json = (
-              requests.post(url, json={"query": anime_query, "variables": variables})
-              .json()["data"]
-              .get("Media")
-          )
-          mog = f"{json.get('coverImage')['extraLarge']}"
-          os.system(f"wget {mog} -O thumb2.jpg")
+            ttx = Path("cap.txt")
+            if ttx.is_file():
+                raise Exception("Parsing turned off")
+            variables = {"search": coy, "type": "ANIME"}
+            json = (
+                requests.post(url, json={"query": anime_query, "variables": variables})
+                .json()["data"]
+                .get("Media")
+            )
+            mog = f"{json.get('coverImage')['extraLarge']}"
+            os.system(f"wget {mog} -O thumb2.jpg")
         except Exception:
-          pass
+            pass
     except Exception:
         pass
     return b, d, e
@@ -416,18 +418,20 @@ async def custcap(name, fname):
         else:
             fil3 = fil3t
         try:
-          ttx = Path("cap.txt")
-          if ttx.is_file():
-            raise Exception("Parsing turned off")
-            variables = {"search": oi, "type": "ANIME"}
-            json = (
-                requests.post(url, json={"query": anime_query, "variables": variables})
-                .json()["data"]
-                .get("Media")
-            )
-            oi = f"{json['title']['english']}"
-            oi = f"{json['title']['romaji']}" if oi == "None" else oi
-            g = f"{json.get('episodes')}"
+            ttx = Path("cap.txt")
+            if ttx.is_file():
+                raise Exception("Parsing turned off")
+                variables = {"search": oi, "type": "ANIME"}
+                json = (
+                    requests.post(
+                        url, json={"query": anime_query, "variables": variables}
+                    )
+                    .json()["data"]
+                    .get("Media")
+                )
+                oi = f"{json['title']['english']}"
+                oi = f"{json['title']['romaji']}" if oi == "None" else oi
+                g = f"{json.get('episodes')}"
         except Exception:
             g = ""
         oi = string.capwords(oi)
