@@ -3,12 +3,12 @@ from decouple import config
 from subprocess import run as bashrun
 
 try:
-        print("Default var for upstream repo & branch will used if none were given!")
-        UPSTREAM_REPO = config("UPSTREAM_REPO", default="")
-        UPSTREAM_BRANCH = config("UPSTREAM_BRANCH", default="")
+    print("Default var for upstream repo & branch will used if none were given!")
+    UPSTREAM_REPO = config("UPSTREAM_REPO", default="")
+    UPSTREAM_BRANCH = config("UPSTREAM_BRANCH", default="")
 except Exception:
-        print("Environment vars Missing")
-        traceback.print_exc()
+    print("Environment vars Missing")
+    traceback.print_exc()
 try:
     if not UPSTREAM_REPO:
         UPSTREAM_REPO = "https://github.com/Niffy-the-conqueror/Encode2Tg"
@@ -30,4 +30,4 @@ try:
     else:
         print('Something went wrong while updating,maybe invalid upstream repo?')
 except Exception:
-     traceback.print_exc()
+    traceback.print_exc()
