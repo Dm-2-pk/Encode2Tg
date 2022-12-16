@@ -19,6 +19,8 @@ Optional Variables | Explanation
 `FFMPEG` | input Your FFMPEG Code or Handbrake-cli code (after installing it)  with """{}""" as input and output. (Eg. __ffmpeg -i """{}""" -preset veryfast -vcodec libx265 -crf 27 """{}"""__) escape the " characters if you're deploying locally 
 `LOG_CHANNEL` | Input Log Group/Channel ID (bot must be an admin in target group or channel)
 `DATABASE_URL` | input valid Mongodb Database Url
+`UPSTREAM_REPO` `UPSTREAM_BRANCH` | Input custom repo link and custom repo branch name, For use with the update function
+*Note: Update will fail if there are new modules or dependencies in bot
 ---
 
 
@@ -30,7 +32,9 @@ __Customized To work Specifically For Animes!__
 ---
 ```
 start - Check If Bot Is Awake
-restart - ☢️ Restart Bot 
+restart -  Restart Bot 
+update - Update bot 
+nuke - ☢️ Nuke bot 
 bash - /bash + command 
 eval - Evaluate code
 peval - same as eval but with pyrogram 

@@ -171,8 +171,7 @@ async def parser(name):
             c = ""
         try:
             e = na["release_group"]
-        except Exception as er:
-            LOGS.info(er)
+        except Exception:
             e = ""
         try:
             s = na["subtitles"]

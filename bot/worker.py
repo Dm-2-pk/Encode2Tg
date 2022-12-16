@@ -247,7 +247,7 @@ async def encodestat():
                 y, yy = QUEUE[list(QUEUE.keys())[0]]
                 y = await qparse(y)
                 x = f"**STATUS:**\n\n🟢. `{y}`\n\n**QUEUE:**\n──────\n"
-            while i < len(QUEUE):
+            while i < len(QUEUE) and i < 6:
                 y, yy = QUEUE[list(QUEUE.keys())[i]]
                 y = await qparse(y)
                 x += f"{i}. `{y}`\n"
