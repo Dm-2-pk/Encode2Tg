@@ -383,6 +383,7 @@ async def custcap(name, fname):
         oi, z, y, e, fil2, fil3, s, st = await parser(name)
         if oi is None:
             raise Exception("Parsing Failed")
+        cdp = CAP_DECO
         with open("ffmpeg.txt", "r") as file:
             nani = file.read().rstrip()
             file.close()
@@ -448,32 +449,32 @@ async def custcap(name, fname):
             a2 = await info(out, e)
         except Exception:
             a2 = ""
-        caption = f"**◉ Title:** `{oi}`\n"
+        caption = f"**{cdp} Title:** `{oi}`\n"
         if z:
-            caption += f"**◉ Episode:** `{z}`"
+            caption += f"**{cdp} Episode:** `{z}`"
         if VERSION2:
             caption += " (v2)"
         if VERSION2 and WORKING:
-            caption += f"\n**◉ (V2) Reason:** `{VERSION2[0]}`"
+            caption += f"\n**{cdp} (V2) Reason:** `{VERSION2[0]}`"
         if z:
             caption += "\n"
         if y:
-            caption += f"**◉ Season:** `{y}`\n"
+            caption += f"**{cdp} Season:** `{y}`\n"
         if fil3 and a2:
             fil3 = fil3.format(**locals())
-            caption += f"**◉ Type:** [{fil3}]({a2})"
+            caption += f"**{cdp} Type:** [{fil3}]({a2})"
         else:
             fil3 = fil3.format(**locals())
-            caption += f"**◉ Type:** `{fil3}`"
+            caption += f"**{cdp} Type:** `{fil3}`"
         if z == g:
             caption += " **[END]**\n"
         else:
             caption += "\n"
         if st:
-            caption += f"**◉ Episode Title:** `{st}`\n"
+            caption += f"**{cdp} Episode Title:** `{st}`\n"
         if "1080" in nani:
-            caption += "**◉ 🌟:** `[1080p] [AV1]`\n"
-        caption += f"✿ **CRC32:** `[{crc32s}]`\n"
+            caption += "**{cdp} 🌟:** `[1080p] [AV1]`\n"
+        caption += f"{cdp} **CRC32:** `[{crc32s}]`\n"
         caption += "**🔗 @ANi_MiNE**"
     except Exception:
         ers = traceback.format_exc()

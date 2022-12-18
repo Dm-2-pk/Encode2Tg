@@ -33,6 +33,7 @@ try:
     DATABASE_URL = config("DATABASE_URL", default="")
     FCHANNEL = config("FCHANNEL", default="")
     FCHANNEL_STAT = config("FCHANNEL_STAT", default="")
+    CAP_DECO = config("CAP_DECO", default="◉")
 except Exception as e:
     print("Environment vars Missing")
     print("something went wrong")
