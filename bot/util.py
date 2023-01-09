@@ -335,7 +335,7 @@ async def parse(name, kk, aa):
         bb = kk.replace(f".{aa}", " @Ani_Mine.mkv")
         bb2 = bb
     if "/" in bb:
-        bb = bb.replace("/", "")
+        bb = bb.replace("/", " ")
     return bb, bb2
 
 
