@@ -475,7 +475,7 @@ async def custcap(name, fname):
         if st:
             caption += f"**{cdp} Episode Title:** `{st}`\n"
         if "1080" in nani:
-            caption += "**{cdp} 🌟:** `[1080p] [AV1]`\n"
+            caption += f"**🌟:** `[1080p] [AV1]`\n"
         caption += f"**{cdp} CRC32:** `[{crc32s}]`\n"
         caption += "**🔗 @ANi_MiNE**"
     except Exception:
