@@ -17,6 +17,7 @@ Optional Variables | Explanation
 :--------- | :---------------------------------------------
 `THUMBNAIL` `ICON` | input telegraph link of a picture for use as Thumbnail, Watermark.
 `FFMPEG` | input Your FFMPEG Code or Handbrake-cli code (after installing it)  with """{}""" as input and output. (Eg. __ffmpeg -i """{}""" -preset veryfast -vcodec libx265 -crf 27 """{}"""__) escape the " characters if you're deploying locally 
+`TEMP_USERS` | Additional restricted users allowed to use the bot
 `LOG_CHANNEL` | Input Log Group/Channel ID (bot must be an admin in target group or channel)
 `DATABASE_URL` | input valid Mongodb Database Url
 `FCHANNEL` `FCHANNEL_STATS` | Input Channel id where **only** the output video will get forwarded. For the 2nd variable input message id of a message in channel to be used as live status for encodes.
