@@ -189,7 +189,7 @@ async def restart(event):
 
 
 async def listqueue(event):
-    if str(event.sender_id) not in OWNER:
+    if str(event.sender_id) not in OWNER and str(event.sender_id) not in TEMP_USERS:
         return await event.delete()
     if not QUEUE:
         yo = await event.reply("Nothing In Queue")
@@ -204,7 +204,8 @@ async def listqueue(event):
         x = ""
         while i < len(QUEUE):
             y, yy = QUEUE[list(QUEUE.keys())[i]]
-            x += f"{i}. {y}\n"
+            ss = await app.get_users(yy)
+            x += f"{i}. {y} ({ss.first_name})\n"
             i = i + 1
         if x:
             x += "\n**To remove an item from queue use** /clear <queue number>"
@@ -219,7 +220,7 @@ async def listqueue(event):
 
 
 async def listqueuep(event):
-    if str(event.sender_id) not in OWNER:
+    if str(event.sender_id) not in OWNER and str(event.sender_id) not in TEMP_USERS:
         return await event.delete()
     if not QUEUE:
         yo = await event.reply("Nothing In Queue")
@@ -271,7 +272,7 @@ async def encodestat():
                 y = await qparse(y)
                 x += f"{i}. `{y}`\n"
                 i = i + 1
-            if not len(QUEUE) > 0:
+            if len(QUEUE) == 1 and not WORKING:
                 loc = await enquotes()
                 x += f"Nothing Here; While you wait:\n\n{loc}"
         except Exception:
@@ -384,7 +385,7 @@ async def allowgroupenc(event):
 
 
 async def getthumb(event):
-    if str(event.sender_id) not in OWNER and event.sender_id != DEV:
+    if str(event.sender_id) not in OWNER and event.sender_id not in TEMP_USERS:
         return await event.delete()
     tbcheck = Path("thumb2.jpg")
     if tbcheck.is_file():
@@ -462,7 +463,7 @@ async def filter(event):
 
 
 async def clearqueue(event):
-    if str(event.sender_id) not in OWNER and event.sender_id != DEV:
+    if str(event.sender_id) not in OWNER and str(event.sender_id) not in TEMP_USERS:
         return await event.delete()
     temp = ""
     try:
@@ -473,7 +474,9 @@ async def clearqueue(event):
         try:
             temp = int(temp)
             try:
-                q, file = QUEUE[list(QUEUE.keys())[temp]]
+                q, user = QUEUE[list(QUEUE.keys())[temp]]
+                if str(event.sender_id) not in OWNER and event.sender_id != user:
+                    return await event.reply("You didn't add this to queue so you can't remove it!")
                 QUEUE.pop(list(QUEUE.keys())[temp])
                 yo = await event.reply(f"{q} has been removed from queue")
                 await save2db()
@@ -482,10 +485,27 @@ async def clearqueue(event):
         except Exception:
             yo = await event.reply("Pass a number for an item on queue to be removed")
     else:
-        yo = await event.reply("**Cleared Queued Files!**")
-        QUEUE.clear()
+        try:
+            x = "**Cleared the following files from queue**\n"
+            if WORKING:
+                i = 0
+            else:
+                i = 1
+            while i < len(QUEUE):
+                y, user = QUEUE[list(QUEUE.keys())[i]]
+                if str(event.sender_id) not in OWNER and event.sender_id != user:
+                    pass
+                else:
+                    QUEUE.pop(list(QUEUE.keys())[i])
+                    x += f"{i}. {y} \n"
+                        i = i + 1
+        except Exception:
+            ers = traceback.format_exc()
+            x = "__An Error occurred check /logs for more info__"
+            LOGS.info(ers)
+        yo = await event.reply(x)
         if DATABASE_URL:
-            queue.delete_many({})
+            await save2db()
     await asyncio.sleep(7)
     await event.delete()
     await yo.delete()
@@ -607,11 +627,13 @@ async def encod(event):
         LOGS.info(ers)
 
 
-async def pencode(message):
+async def enchecker(message):
     try:
-        if str(message.chat.id) not in OWNER:
+        inputer = str(message.chat.id)
+        act_inputer = str(message.from_user.id)
+        if inputer not in OWNER and inputer not in TEMP_USERS:
             try:
-                if str(message.from_user.id) not in OWNER:
+                if act_inputer not in OWNER and act_inputer not in TEMP_USERS:
                     return await message.delete()
                 else:
                     if GROUPENC:
@@ -627,6 +649,14 @@ async def pencode(message):
                 yo = await message.reply("🙄")
                 await asyncio.sleep(5)
                 return await yo.delete()
+      except Exception:
+          er = traceback.format_exc()
+          LOGS.info(er)
+
+
+async def pencode(message):
+    try:
+        await enchecker(message)
         if WORKING or QUEUE:
             xxx = await message.reply("`Adding To Queue`", quote=True)
             media_type = str(message.media)
