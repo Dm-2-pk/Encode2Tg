@@ -486,6 +486,10 @@ async def clearqueue(event):
             yo = await event.reply("Pass a number for an item on queue to be removed")
     else:
         try:
+            if str(event.sender_id) not in OWNER and event.sender_id != user:
+                boo = 1
+            else:
+                boo = ""
             xx = "**Cleared the following files from queue:**\n"
             if WORKING:
                 i = 0
@@ -494,8 +498,7 @@ async def clearqueue(event):
             x = ""
             while i < len(QUEUE):
                 y, user = QUEUE[list(QUEUE.keys())[i]]
-                await asyncio.sleep(1)
-                if str(event.sender_id) not in OWNER and event.sender_id != user:
+                if boo:
                     pass
                 else:
                     QUEUE.pop(list(QUEUE.keys())[i])

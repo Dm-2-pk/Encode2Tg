@@ -17,7 +17,6 @@ try:
     if os.path.exists('.git'):
         bashrun(["rm", "-rf", ".git"])
     update = bashrun([f"git init -q \
-                       && python3 -m pip install -r requirements.txt \
                        && git config --global user.email 117080364+Niffy-the-conqueror@users.noreply.github.com \
                        && git config --global user.name Niffy-the-conqueror \
                        && git add . \
