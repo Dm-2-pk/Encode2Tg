@@ -649,7 +649,7 @@ async def enchecker(message):
                 yo = await message.reply("🙄")
                 await asyncio.sleep(5)
                 return await yo.delete()
-      except Exception:
+    except Exception:
           er = traceback.format_exc()
           LOGS.info(er)
 
