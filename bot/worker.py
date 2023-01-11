@@ -498,7 +498,7 @@ async def clearqueue(event):
                 else:
                     QUEUE.pop(list(QUEUE.keys())[i])
                     x += f"{i}. {y} \n"
-                        i = i + 1
+                    i = i + 1
         except Exception:
             ers = traceback.format_exc()
             x = "__An Error occurred check /logs for more info__"
