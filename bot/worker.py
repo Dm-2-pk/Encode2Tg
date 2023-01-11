@@ -487,7 +487,7 @@ async def clearqueue(event):
     else:
         try:
             if str(event.sender_id) not in OWNER:
-               QUEUE.clear()
+                QUEUE.clear()
                 xx = "✅"
                 x = "**Queue cleared successfully.**"
             else:
