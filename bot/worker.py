@@ -486,13 +486,15 @@ async def clearqueue(event):
             yo = await event.reply("Pass a number for an item on queue to be removed")
     else:
         try:
-            x = "**Cleared the following files from queue**\n"
+            xx = "**Cleared the following files from queue:**\n"
             if WORKING:
                 i = 0
             else:
                 i = 1
+            x = ""
             while i < len(QUEUE):
                 y, user = QUEUE[list(QUEUE.keys())[i]]
+                await asyncio.sleep(1)
                 if str(event.sender_id) not in OWNER and event.sender_id != user:
                     pass
                 else:
@@ -501,8 +503,13 @@ async def clearqueue(event):
                     i = i + 1
         except Exception:
             ers = traceback.format_exc()
+            xx = "⚠️"
             x = "__An Error occurred check /logs for more info__"
             LOGS.info(ers)
+        if x:
+            x = f"{xx} {x}"
+        else:
+            x = "**Nothing to clear!**"
         yo = await event.reply(x)
         if DATABASE_URL:
             await save2db()
