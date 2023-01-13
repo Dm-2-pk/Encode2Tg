@@ -188,7 +188,7 @@ async def enquoter(msg, rply):
         ers = traceback.format_exc()
         LOGS.info(ers)
 
-
+  
 async def enquotes():
     res = ""
     while not res:
@@ -200,12 +200,19 @@ async def enquotes():
                 result = res[i]["quote"]
                 result2 = res[i]["author"]
                 emoji = ("🤓", "😎", "🤠", "🌚", "🌝", "☺️", "😊", "😑", "🥸")
-                y = random.choice(emoji)
+                y = enmoji()
                 output = (result[:2045] + "…") if len(result) > 2046 else result
                 output = f"{y} **{result2}:** `{output}`"
         except Exception:
             pass
     return output
+
+
+def enmoji():
+    emoji = ("🤓", "😎", "🤠", "🌚", "❤️", "🥺", "🌝", "☺️", "😊", "😑", "🥸", "😵‍💫", "✅")
+    y = random.choice(emoji)
+    return y
+
 
 
 async def progress_for_pyrogram(current, total, bot, ud_type, message, start):
