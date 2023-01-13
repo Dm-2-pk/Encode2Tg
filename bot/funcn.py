@@ -199,7 +199,6 @@ async def enquotes():
             for i in range(len(res)):
                 result = res[i]["quote"]
                 result2 = res[i]["author"]
-                emoji = ("🤓", "😎", "🤠", "🌚", "🌝", "☺️", "😊", "😑", "🥸")
                 y = enmoji()
                 output = (result[:2045] + "…") if len(result) > 2046 else result
                 output = f"{y} **{result2}:** `{output}`"
