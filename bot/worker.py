@@ -626,12 +626,12 @@ async def encod(event):
         LOGS.info(ers)
 
 
-async def enchecker(message):
+async def pencode(message):
     try:
         inputer = str(message.chat.id)
-        act_inputer = str(message.from_user.id)
         if inputer not in OWNER and inputer not in TEMP_USERS:
             try:
+                act_inputer = str(message.from_user.id)
                 if act_inputer not in OWNER and act_inputer not in TEMP_USERS:
                     return await message.delete()
                 else:
@@ -645,17 +645,9 @@ async def enchecker(message):
                         await yo.delete()
                         return
             except BaseException:
-                yo = await message.reply("🙄")
+                yo = await message.reply(FMOJI)
                 await asyncio.sleep(5)
                 return await yo.delete()
-    except Exception:
-          er = traceback.format_exc()
-          LOGS.info(er)
-
-
-async def pencode(message):
-    try:
-        await enchecker(message)
         if WORKING or QUEUE:
             xxx = await message.reply("`Adding To Queue`", quote=True)
             media_type = str(message.media)
