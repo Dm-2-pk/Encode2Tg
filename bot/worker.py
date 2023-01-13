@@ -646,7 +646,7 @@ async def pencode(message):
                         return
             except BaseException:
                 
-                yo = await message.reply(f"enmoji()")
+                yo = await message.reply(f"{enmoji()}")
                 await asyncio.sleep(5)
                 return await yo.delete()
         if WORKING or QUEUE:

@@ -88,8 +88,8 @@ except Exception as e:
 async def startup():
     try:
         for i in OWNER.split():
-            await bot.send_message(int(i), "**I'm Up! 😎**")
+            await bot.send_message(int(i), "**I'm Up! {enmoji()}**")
         if LOG_CHANNEL:
-            await bot.send_message(int(LOG_CHANNEL), "**Bot Is Back Online! 🛰️**")
+            await bot.send_message(int(LOG_CHANNEL), "**Bot Is Back Online! {enmoji()}**")
     except BaseException:
         pass
