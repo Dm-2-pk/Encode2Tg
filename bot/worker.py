@@ -486,7 +486,7 @@ async def clearqueue(event):
             yo = await event.reply("Pass a number for an item on queue to be removed")
     else:
         try:
-            if str(event.sender_id) not in OWNER:
+            if str(event.sender_id) in OWNER:
                 QUEUE.clear()
                 xx = "✅"
                 x = "**Queue cleared successfully.**"
