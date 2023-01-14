@@ -45,7 +45,6 @@ from telethon.sessions import StringSession
 from telethon.utils import pack_bot_file_id
 
 from .config import *
-from .funcn import enmoji
 
 botStartTime = time.time()
 
@@ -84,6 +83,12 @@ except Exception as e:
     LOGS.info("Bot is quiting...")
     LOGS.info(str(e))
     exit()
+
+
+def enmoji():
+    emoji = ("🤓", "😎", "🤠", "🌚", "🛰️", "❤️", "📡", "🥺", "🌝", "☺️", "😊", "😑", "🥸", "😵‍💫", "✅")
+    y = random.choice(emoji)
+    return y
 
 
 async def startup():

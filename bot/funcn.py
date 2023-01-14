@@ -207,12 +207,6 @@ async def enquotes():
     return output
 
 
-def enmoji():
-    emoji = ("🤓", "😎", "🤠", "🌚", "🛰️", "❤️", "📡", "🥺", "🌝", "☺️", "😊", "😑", "🥸", "😵‍💫", "✅")
-    y = random.choice(emoji)
-    return y
-
-
 
 async def progress_for_pyrogram(current, total, bot, ud_type, message, start):
     now = time.time()
