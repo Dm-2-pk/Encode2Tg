@@ -374,7 +374,20 @@ async def dynamicthumb(name, kk, aa):
             mog = f"{json.get('coverImage')['extraLarge']}"
             os.system(f"wget {mog} -O thumb2.jpg")
         except Exception:
-            pass
+            try:
+                ttx = Path("parse.txt")
+                if ttx.is_file():
+                    raise Exception("Parsing turned off")
+                variables = {"search": name, "type": "ANIME"}
+                json = (
+                    requests.post(url, json={"query": anime_query, "variables": variables})
+                    .json()["data"]
+                    .get("Media")
+                )
+                mog = f"{json.get('coverImage')['extraLarge']}"
+                os.system(f"wget {mog} -O thumb2.jpg")
+            except Exception:
+                pass
     except Exception:
         pass
     return b, d, e
