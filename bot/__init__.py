@@ -45,6 +45,7 @@ from telethon.sessions import StringSession
 from telethon.utils import pack_bot_file_id
 
 from .config import *
+from .funcn import enmoji
 
 botStartTime = time.time()
 
