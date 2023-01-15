@@ -352,15 +352,15 @@ async def dynamicthumb(name, kk, aa):
                 .json()["data"]
                 .get("Media")
             )
-            b = f"{json['title']['english']}"
-            b = f"{json['title']['romaji']}" if b == "None" else b
+            ba = f"{json['title']['english']}"
+            ba = f"{json['title']['romaji']}" if ba == "None" else ba
         except Exception:
             pass
         if c:
             coy = c.replace("0", "")
-            coy = f"{b} {coy}"
+            coy = f"{ba} {coy}"
         else:
-            coy = b
+            coy = ba
         try:
             ttx = Path("parse.txt")
             if ttx.is_file():
@@ -378,7 +378,7 @@ async def dynamicthumb(name, kk, aa):
                 ttx = Path("parse.txt")
                 if ttx.is_file():
                     raise Exception("Parsing turned off")
-                variables = {"search": name, "type": "ANIME"}
+                variables = {"search": b, "type": "ANIME"}
                 json = (
                     requests.post(url, json={"query": anime_query, "variables": variables})
                     .json()["data"]
